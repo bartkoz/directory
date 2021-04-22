@@ -1,6 +1,10 @@
 from django.urls import path
 
-from app.views import UploaderAPIEndpoint
+from app.views import UploaderAPIView, TeacherListAPIView, TeacherDetailAPIView
 
 app_name = "directory"
-urlpatterns = [path("directory/uploader/", UploaderAPIEndpoint.as_view())]
+urlpatterns = [
+    path("directory/uploader/", UploaderAPIView.as_view()),
+    path("directory/teachers/", TeacherListAPIView.as_view()),
+    path("directory/teachers/<int:pk>/", TeacherDetailAPIView.as_view(), name="teacher_detail"),
+]

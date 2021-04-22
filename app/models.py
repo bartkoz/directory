@@ -27,9 +27,7 @@ class Teacher(TimestampAbstractModel):
     email_address = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     room_number = models.CharField(max_length=10, blank=True, null=True)
-    subjects_taught = models.ManyToManyField(
-        Subject,
-    )
+    subjects_taught = models.ManyToManyField(Subject, blank=True, null=True)
 
     @property
     def taught_subjects_count(self):
