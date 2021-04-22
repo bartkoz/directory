@@ -1,0 +1,7 @@
+[tool.black]
+line-length = 110
+exclude = '''
+/(
+  | migrations
+)/
+'''
