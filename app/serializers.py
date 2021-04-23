@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.urls import reverse
 
-from app.models import Teacher, Subject
+from app.models import Teacher
 
 
 class UploaderSerializer(serializers.Serializer):
@@ -28,21 +28,20 @@ class CSVLineSerializer(serializers.ModelSerializer):
         model = Teacher
 
 
-class SubjectsSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = "name"
-        model = Subject
-
-
 class TeacherDetailSerializer(serializers.ModelSerializer):
-    subjects_taught = serializers.SerializerMethodField()
+    subjects_taught = serializers.StringRelatedField(many=True)
 
     class Meta:
-        exclude = ("profile_picture_name",)
+        fields = (
+            "first_name",
+            "last_name",
+            "profile_picture",
+            "email_address",
+            "phone_number",
+            "room_number",
+            "subjects_taught",
+        )
         model = Teacher
-
-    def get_subjects_taught(self, obj):
-        return obj.subjects_taught.values_list("name", flat=True)
 
 
 class TeacherSerializer(TeacherDetailSerializer):

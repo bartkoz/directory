@@ -15,7 +15,7 @@ class UploaderAPIView(APIView):
     serializer_class = UploaderSerializer
 
     def get(self, request, *args, **kwargs):
-        return Response({"Please upload csv or zip file."})
+        return Response({"message": "Please upload csv or zip file."})
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
