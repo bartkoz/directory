@@ -2,3 +2,4 @@
 .idea
 *.pyc
 .coverage
+directory/settings_local.py
