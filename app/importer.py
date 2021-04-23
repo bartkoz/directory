@@ -6,6 +6,7 @@ from typing import Dict
 from zipfile import ZipFile
 
 from django.core.files.images import ImageFile
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from app.models import Subject, Teacher
 from app.serializers import CSVLineSerializer
@@ -28,7 +29,7 @@ def map_csv_to_model_fields(row: Dict) -> Dict:
     return data
 
 
-def import_csv(file: io.BytesIO) -> None:
+def import_csv(file: InMemoryUploadedFile) -> None:
     teacher_serializer = CSVLineSerializer
     file = file.read().decode("utf-8")
     reader = csv.DictReader(io.StringIO(file))
@@ -55,7 +56,7 @@ def import_csv(file: io.BytesIO) -> None:
                             current_subjects_teacher_count += 1
 
 
-def import_zip(file: io.BytesIO) -> None:
+def import_zip(file: InMemoryUploadedFile) -> None:
     zfile = ZipFile(file, "r")
     images = dict()
     for name in zfile.namelist():
@@ -70,7 +71,7 @@ def import_zip(file: io.BytesIO) -> None:
             continue
 
 
-def perform_import(file: io.BytesIO) -> None:
+def perform_import(file: InMemoryUploadedFile) -> None:
     content_type = file.content_type
     if content_type == "application/zip":
         return import_zip(file)
