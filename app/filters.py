@@ -1,23 +1,20 @@
+from django import forms
+
 from app.models import Teacher, Subject
 import django_filters
 
 
 class NameFilter(django_filters.FilterSet):
     teacher_filter = django_filters.CharFilter(
-        method="teacher_filter_method", label="teacher last name filter"
+        method="teacher_filter_method", label="teacher last name filter", max_length=1
     )
-    subject_filter = django_filters.ChoiceFilter(
-        choices=[(x, x) for x in Subject.objects.values_list("name", flat=True)],
-        method="subject_filter_method",
-        label="subject filter",
+    subjects_taught = django_filters.ModelMultipleChoiceFilter(
+        queryset=Subject.objects.all(), widget=forms.CheckboxSelectMultiple
     )
 
     class Meta:
         model = Teacher
-        fields = ["teacher_filter", "subject_filter"]
+        fields = ["teacher_filter", "subjects_taught"]
 
     def teacher_filter_method(self, queryset, name, value):
         return queryset.filter(last_name__istartswith=value)
-
-    def subject_filter_method(self, queryset, name, value):
-        return queryset.filter(subjects_taught__name=value)
