@@ -7,21 +7,21 @@ from factory.fuzzy import FuzzyInteger, FuzzyText
 from app.models import Teacher, Subject
 
 
-class UserFactory(factory.Factory):
+class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = User
 
     username = "test"
 
 
-class SubjectFactory(factory.Factory):
+class SubjectFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Subject
 
     name = FuzzyText(length=12, chars=string.ascii_letters)
 
 
-class TeacherFactory(factory.Factory):
+class TeacherFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Teacher
 

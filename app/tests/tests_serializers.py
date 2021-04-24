@@ -2,15 +2,11 @@ from unittest import TestCase, mock
 
 from django.core.files import File
 
-from app.factories import TeacherFactory
 from app.serializers import UploaderSerializer, CSVLineSerializer
 from app.tests.tests_importer import map_csv_to_db
 
 
 class SerializerTests(TestCase):
-    def setUp(self):
-        self.teacher = TeacherFactory
-
     def test_uploader_serializer(self):
         params = ["application/zip", "text/csv"]
         mock_file = mock.MagicMock(spec=File)

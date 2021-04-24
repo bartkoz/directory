@@ -36,9 +36,7 @@ class APIViewTests(TestCase):
 
     def test_teacher_list(self):
         teacher = self.teacher.create()
-        teacher.save()
         subject = self.subject.create()
-        subject.save()
         teacher.subjects_taught.add(subject)
         r = self.client.get(reverse("directory:teacher_list"))
         data = [
@@ -54,9 +52,7 @@ class APIViewTests(TestCase):
 
     def test_teacher_detail(self):
         teacher = self.teacher.create()
-        teacher.save()
         subject = self.subject.create()
-        subject.save()
         teacher.subjects_taught.add(subject)
         r = self.client.get(reverse("directory:teacher_detail", kwargs={"pk": teacher.pk}))
         data = {
