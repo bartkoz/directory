@@ -47,8 +47,8 @@ def import_csv(file: InMemoryUploadedFile) -> None:
                 teacher_obj, _ = Teacher.objects.update_or_create(
                     email_address=mapped_row["email_address"], defaults=mapped_row
                 )
-                current_subjects_teacher_count = teacher_obj.taught_subjects_count
                 if subjects_taught:
+                    current_subjects_teacher_count = teacher_obj.taught_subjects_count
                     for subject_name in re.split(", |,", subjects_taught):
                         subject, _ = Subject.objects.get_or_create(name=subject_name.lower())
                         if current_subjects_teacher_count < 5:
