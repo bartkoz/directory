@@ -20,4 +20,5 @@
 ```
 /directory/uploader/
 /directory/teachers/
+/directory/teachers/<teacher_id>
 ```
