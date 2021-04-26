@@ -3,8 +3,9 @@
 1. pull repo
 2. cd directory
 3. pip install -r requirements.txt
-4. ./manage.py createsuperuser
-5. ./manage.py runserver
+4. ./manage.py migrate
+5. ./manage.py createsuperuser
+6. ./manage.py runserver
 ```
 
 ##### Setup instructions (docker):
